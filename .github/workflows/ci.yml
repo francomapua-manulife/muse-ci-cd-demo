@@ -15,7 +15,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Determine event type
         run: |
           if [ "${{ github.event_name }}" == "pull_request" ]; then
@@ -26,7 +25,7 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
@@ -37,9 +36,3 @@ jobs:
 
       - name: Run tests
         run: npm test
-
-      - name: Trigger CD on merge
-        if: github.event_name == 'push'
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          event-type: trigger-cd
