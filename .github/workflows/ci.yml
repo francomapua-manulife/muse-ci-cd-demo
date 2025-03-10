@@ -1,12 +1,14 @@
-name: CI/CD Pipeline
+name: CI
 
 on:
   push:
     branches:
       - main
+      - dev
   pull_request:
     branches:
       - main
+      - dev
 
 jobs:
   build:
@@ -26,6 +28,3 @@ jobs:
 
       - name: Run tests
         run: npm test
-
-      - name: "Deployment"
-        run: echo "Deploying to production..."
