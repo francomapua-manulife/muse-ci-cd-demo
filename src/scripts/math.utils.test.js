@@ -27,5 +27,6 @@ describe('Math Utils', () => {
 
   test('divide function should throw error when dividing by zero', () => {
     expect(() => divide(1, 0)).toThrow('Cannot divide by zero');
+    // check
   });
 });
