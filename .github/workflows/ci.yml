@@ -36,3 +36,11 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Trigger CD on merge
+        if: github.event_name == 'push'
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.PAT }}
+          event-type: trigger-cd
+          client-payload: '{"ref": "${{ github.ref }}", "branch": "${{ github.ref_name }}"}'
