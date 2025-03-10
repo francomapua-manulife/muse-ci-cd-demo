@@ -1,1 +1,1 @@
-# muse-ci-cd-demo
+# Super Duper Math API Server
