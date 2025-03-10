@@ -22,9 +22,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build the application
-        run: npm run build
-
       - name: Deploy to production
         run: |
           # Add your deployment commands here
