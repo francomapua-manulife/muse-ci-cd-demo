@@ -13,7 +13,7 @@ jobs:
 
       - name: Deploy info
         run: |
-          echo "Triggered by CI success on a merge to ${{ github.event.client_payload.branch }}"
+          echo "Triggered by CI success on a merge"
 
       - name: Checkout code
         uses: actions/checkout@v4

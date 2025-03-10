@@ -43,4 +43,3 @@ jobs:
         uses: peter-evans/repository-dispatch@v3
         with:
           event-type: trigger-cd
-          client-payload: '{"ref": "${{ github.ref }}", "branch": "${{ github.ref_name }}"}'
