@@ -2,17 +2,19 @@
 name: CD
 
 on:
-  workflow_run:
-    workflows: ["CI"]
-    types:
-      - completed
+  repository_dispatch:
+    types: [trigger-cd]
 
 jobs:
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
+
+      - name: Deploy info
+        run: |
+          echo "Triggered by CI success on a merge to ${{ github.event.client_payload.branch }}"
+          
       - name: Checkout code
         uses: actions/checkout@v2
 
