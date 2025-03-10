@@ -15,16 +15,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      - name: Determine event type
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "Running CI for a Pull Request to ${{ github.base_ref }}"
+          elif [ "${{ github.event_name }}" == "push" ]; then
+            echo "Running CI for a Merge to ${{ github.ref_name }}"
+          fi
+
       - name: Checkout code
-        uses: actions/checkout@v2
-
+        uses: actions/checkout@v4
+        
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '14'
-
+          node-version: '22'
+      
       - name: Install dependencies
         run: npm install
 
       - name: Run tests
         run: npm test
+
+      - name: Trigger CD on merge
+        if: github.event_name == 'push'
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: trigger-cd
+          client-payload: '{"ref": "${{ github.ref }}", "branch": "${{ github.ref_name }}"}'
