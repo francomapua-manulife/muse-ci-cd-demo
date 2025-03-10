@@ -24,4 +24,8 @@ describe('Math Utils', () => {
     expect(divide(-4, -2)).toBe(2);
     expect(divide(0, 1)).toBe(0);
   });
+
+  test('divide function should handle division by zero', () => {
+    expect(() => divide(1, 0)).toThrow('Division by zero');
+  });
 });
