@@ -42,6 +42,5 @@ jobs:
         if: github.event_name == 'push'
         uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           event-type: trigger-cd
           client-payload: '{"ref": "${{ github.ref }}", "branch": "${{ github.ref_name }}"}'
